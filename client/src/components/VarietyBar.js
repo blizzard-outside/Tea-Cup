@@ -3,18 +3,18 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Card, Row} from "react-bootstrap";
 
-const BrandBar = observer(() => {
-    const {device} = useContext(Context)
+const VarietyBar = observer(() => {
+    const {product} = useContext(Context)
 
     return (
         <Row className="d-flex">
-            {device.brands.map(brand =>
+            {product.Varieties.map(variety =>
                 <Card
                     style={{cursor:'pointer'}}
-                    key={brand.id}
+                    key={variety.id}
                     className="p-3"
-                    onClick={() => device.setSelectedBrand(brand)}
-                    border={brand.id === device.selectedBrand.id ? 'danger' : 'light'}
+                    onClick={() => product.setSelectedVariety(variety)}
+                    border={Variety.id === product.selectedVariety.id ? 'danger' : 'light'}
                 >
                     {brand.name}
                 </Card>
@@ -23,4 +23,4 @@ const BrandBar = observer(() => {
     );
 });
 
-export default BrandBar;
+export default VarietyBar;
