@@ -3,14 +3,14 @@ const path = require('path');
 const {Product, ProductInfo} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
-class DeviceController {
+class ProductController {
     async create(req, res, next) {
         try {
             let {name, price, varietyId, typeId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            const device = await Product.create({name, price, varietyId, typeId, img: fileName});
+            const product = await Product.create({name, price, varietyId, typeId, img: fileName});
 
             if (info) {
                 info = JSON.parse(info)
@@ -18,7 +18,7 @@ class DeviceController {
                     ProductInfo.create({
                         title: i.title,
                         description: i.description,
-                        deviceId: device.id
+                        productId: product.id
                     })
                 )
             }
@@ -35,20 +35,20 @@ class DeviceController {
         page = page || 1
         limit = limit || 9
         let offset = page * limit - limit
-        let devices;
-        if (!brandId && !typeId) {
-            devices = await Product.findAndCountAll({limit, offset})
+        let products;
+        if (!varietyId && !typeId) {
+            product = await Product.findAndCountAll({limit, offset})
         }
-        if (brandId && !typeId) {
-            devices = await Product.findAndCountAll({where:{varietyId}, limit, offset})
+        if (varietyId && !typeId) {
+            product = await Product.findAndCountAll({where:{ varietyId}, limit, offset})
         }
-        if (!brandId && typeId) {
-            devices = await Product.findAndCountAll({where:{typeId}, limit, offset})
+        if (!varietyId && typeId) {
+            product = await Product.findAndCountAll({where:{typeId}, limit, offset})
         }
-        if (brandId && typeId) {
-            devices = await Product.findAndCountAll({where:{typeId, varietyId}, limit, offset})
+        if (varietyId && typeId) {
+            product = await Product.findAndCountAll({where:{typeId, varie-tyId}, limit, offset})
         }
-        return res.json(devices)
+        return res.json(product)
     }
 
     async getOne(req, res) {
@@ -63,4 +63,4 @@ class DeviceController {
     }
 }
 
-module.exports = new DeviceController()
+module.exports = new ProductController()
