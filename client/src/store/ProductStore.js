@@ -1,12 +1,12 @@
 import {makeAutoObservable} from "mobx";
 
-export default class DeviceStore {
+export default class ProductStore {
     constructor() {
         this._types = []
-        this._brands = []
-        this._devices = []
+        this._varieties = []
+        this._products = []
         this._selectedType = {}
-        this._selectedBrand = {}
+        this._selectedVariety = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 3
@@ -16,20 +16,20 @@ export default class DeviceStore {
     setTypes(types) {
         this._types = types
     }
-    setBrands(brands) {
-        this._brands = brands
+    setVarieties(varieties) {
+        this._varieties = varieties
     }
-    setDevices(devices) {
-        this._devices = devices
+    setProducts(products) {
+        this._products = products
     }
 
     setSelectedType(type) {
         this.setPage(1)
         this._selectedType = type
     }
-    setSelectedBrand(brand) {
+    setSelectedVariety(variety) {
         this.setPage(1)
-        this._selectedBrand = brand
+        this._selectedVariety = variety
     }
     setPage(page) {
         this._page = page
@@ -41,17 +41,17 @@ export default class DeviceStore {
     get types() {
         return this._types
     }
-    get brands() {
-        return this._brands
+    get varieties() {
+        return this._varieties
     }
-    get devices() {
-        return this._devices
+    get products() {
+        return this._products
     }
     get selectedType() {
         return this._selectedType
     }
-    get selectedBrand() {
-        return this._selectedBrand
+    get selectedVariety() {
+        return this._selectedVariety
     }
     get totalCount() {
         return this._totalCount
