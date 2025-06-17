@@ -2,18 +2,18 @@ import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Row} from "react-bootstrap";
-import DeviceItem from "./DeviceItem";
+import ProductItem from "./ProductItem";
 
-const DeviceList = observer(() => {
-    const {device} = useContext(Context)
+const ProductList = observer(() => {
+    const {product} = useContext(Context)
 
     return (
         <Row className="d-flex">
-            {device.devices.map(device =>
-                <DeviceItem key={device.id} device={device}/>
+            {product.products.map(product =>
+                <ProductItem key={product.id} product={product}/>
             )}
         </Row>
     );
 });
 
-export default DeviceList;
+export default ProductList;
